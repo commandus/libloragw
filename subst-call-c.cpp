@@ -1,3 +1,8 @@
+#undef open
+#undef close
+#undef printf
+#undef fprintf
+
 #include <stdarg.h>
 #include <unistd.h>
 
