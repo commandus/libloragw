@@ -1,6 +1,6 @@
 #
 #
-# cmake .. -DENABLE_HELPER=on (default)
+# cmake ..
 #
 # Add next lines to the ~/git/rak_common_for_gateway/lora/rak2287/sx1302_hal/libloragw/inc/config.h:
 #
@@ -24,9 +24,6 @@ set(LIBLORAGW_INC_DIR ${LIBLORAGW_ROOT}/inc)
 set(JITQUEUE_INC_DIR ${LIBLORAGW_ROOT}/../packet_forwarder/inc)
 
 set(LIBLORAGW_INC_DIRS ${LIBLORAGW_ROOT} ${LIBLORAGW_INC_DIR} ${TINYMT32_INC_DIR} ${JITQUEUE_INC_DIR})
-
-option(ENABLE_UNISTD "Build with unistd" OFF)
-option(ENABLE_HELPER "Build with helper class" ON)
 
 set(LIBLORAGW_SRC
     ${LIBLORAGW_SRC_DIR}/loragw_spi.c
@@ -63,20 +60,7 @@ set(LIBLORAGW_SRC
     ${LIBLORAGW_ROOT}/../packet_forwarder/src/jitqueue.c
 )
 
-if(ENABLE_UNISTD)
-    set(LIBLORAGW_SRC ${LIBLORAGW_SRC}
-        subst-call-unistd.c
-    )
-endif()
-
-if(ENABLE_HELPER)
-    set(LIBLORAGW_SRC ${LIBLORAGW_SRC}
-        subst-call-c.cpp
-    )
-endif()
-
-add_library(loragw STATIC ${LIBLORAGW_SRC})
+add_library(loragw STATIC ${LIBLORAGW_SRC} subst-call-c.cpp)
 set_property(TARGET loragw PROPERTY C_STANDARD 99)
 target_include_directories(loragw PRIVATE . .. third_party/lorawan-network-server ${LIBLORAGW_INC_DIRS} )
-
-# target_link_libraries(loragw )
+target_compile_options(loragw PRIVATE -include subst.h)
