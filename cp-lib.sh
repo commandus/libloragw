@@ -1,7 +1,6 @@
 #!/bin/sh
-DST=doc/libloragw
-mkdir -p $DST
-RAK_COMMON_FOR_GATEWAY_ROOT=~/git/rak_common_for_gateway
+DST=.
+RAK_COMMON_FOR_GATEWAY_ROOT=~/git/1/rak_common_for_gateway
 LIBLORAGW_ROOT=$RAK_COMMON_FOR_GATEWAY_ROOT/lora/rak2287/sx1302_hal/libloragw
 LIBLORAGW_SRC_DIR=$LIBLORAGW_ROOT/src
 cp $LIBLORAGW_SRC_DIR/loragw_spi.c $DST
