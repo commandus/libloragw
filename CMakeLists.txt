@@ -1,16 +1,3 @@
-#
-#
-# cmake ..
-#
-# Add next lines to the ~/git/rak_common_for_gateway/lora/rak2287/sx1302_hal/libloragw/inc/config.h:
-#
-# #include "subst-call-c.h"
-# #define open open_c
-# #define close close_c
-# #define printf printf_c
-# #define fprintf(fd, args...) printf_c(args)
-# 
-
 cmake_minimum_required(VERSION 3.9)
 set(PROJECT_NAME "libloragw")
 project(${PROJECT_NAME} VERSION 1.0)
@@ -60,7 +47,7 @@ set(LIBLORAGW_SRC
     ${LIBLORAGW_ROOT}/../packet_forwarder/src/jitqueue.c
 )
 
-add_library(loragw STATIC ${LIBLORAGW_SRC} subst-call-c.cpp)
+add_library(loragw STATIC ${LIBLORAGW_SRC})
 set_property(TARGET loragw PROPERTY C_STANDARD 99)
-target_include_directories(loragw PRIVATE . .. third_party/lorawan-network-server ${LIBLORAGW_INC_DIRS} )
+target_include_directories(loragw PRIVATE . ${LIBLORAGW_INC_DIRS} )
 target_compile_options(loragw PRIVATE -include subst.h)
