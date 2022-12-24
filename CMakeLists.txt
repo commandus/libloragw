@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.9)
 set(PROJECT_NAME "libloragw")
 project(${PROJECT_NAME} VERSION 1.0)
 
-set(RAK_COMMON_FOR_GATEWAY_ROOT ~/git/1/rak_common_for_gateway)
+set(RAK_COMMON_FOR_GATEWAY_ROOT ../../rak_common_for_gateway)
 set(LIBLORAGW_ROOT ${RAK_COMMON_FOR_GATEWAY_ROOT}/lora/rak2287/sx1302_hal/libloragw)
 set(LIBLORAGW_SRC_DIR ${LIBLORAGW_ROOT}/src)
 set(LIBTINYMT32_SRC_DIR ${LIBLORAGW_ROOT}/../libtools/src)
