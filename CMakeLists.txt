@@ -3,6 +3,8 @@ set(PROJECT_NAME "libloragw")
 project(${PROJECT_NAME} VERSION 1.0)
 
 set(RAK_COMMON_FOR_GATEWAY_ROOT ../../rak_common_for_gateway)
+file(REAL_PATH ${RAK_COMMON_FOR_GATEWAY_ROOT} RAK_COMMON_FOR_GATEWAY_ROOT EXPAND_TILDE)
+
 set(LIBLORAGW_ROOT ${RAK_COMMON_FOR_GATEWAY_ROOT}/lora/rak2287/sx1302_hal/libloragw)
 set(LIBLORAGW_SRC_DIR ${LIBLORAGW_ROOT}/src)
 set(LIBTINYMT32_SRC_DIR ${LIBLORAGW_ROOT}/../libtools/src)
@@ -10,7 +12,7 @@ set(TINYMT32_INC_DIR ${LIBLORAGW_ROOT}/../libtools/inc)
 set(LIBLORAGW_INC_DIR ${LIBLORAGW_ROOT}/inc)
 set(JITQUEUE_INC_DIR ${LIBLORAGW_ROOT}/../packet_forwarder/inc)
 
-set(LIBLORAGW_INC_DIRS ${LIBLORAGW_ROOT} ${LIBLORAGW_INC_DIR} ${TINYMT32_INC_DIR} ${JITQUEUE_INC_DIR})
+set(LIBLORAGW_INC_DIRS . ${LIBLORAGW_ROOT} ${LIBLORAGW_INC_DIR} ${TINYMT32_INC_DIR} ${JITQUEUE_INC_DIR})
 
 set(LIBLORAGW_SRC
     ${LIBLORAGW_SRC_DIR}/loragw_spi.c
@@ -49,5 +51,5 @@ set(LIBLORAGW_SRC
 
 add_library(loragw STATIC ${LIBLORAGW_SRC})
 set_property(TARGET loragw PROPERTY C_STANDARD 99)
-target_include_directories(loragw PRIVATE . ${LIBLORAGW_INC_DIRS} )
+target_include_directories(loragw PRIVATE ${LIBLORAGW_INC_DIRS})
 target_compile_options(loragw PRIVATE -include subst.h)
