@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.9)
 set(PROJECT_NAME "libloragw")
 project(${PROJECT_NAME} VERSION 1.0)
 
-set(RAK_COMMON_FOR_GATEWAY_ROOT ../../rak_common_for_gateway)
+set(RAK_COMMON_FOR_GATEWAY_ROOT ../rak_common_for_gateway)
 file(REAL_PATH ${RAK_COMMON_FOR_GATEWAY_ROOT} RAK_COMMON_FOR_GATEWAY_ROOT EXPAND_TILDE)
 
 set(LIBLORAGW_ROOT ${RAK_COMMON_FOR_GATEWAY_ROOT}/lora/rak2287/sx1302_hal/libloragw)
@@ -43,11 +43,11 @@ set(LIBLORAGW_SRC
     ${LIBLORAGW_SRC_DIR}/loragw_sx1302_timestamp.c
     ${LIBLORAGW_SRC_DIR}/loragw_sx1302_rx.c
     ${LIBLORAGW_SRC_DIR}/loragw_ad5338r.c
-
+#   Tiny Mersenne Twister only 127 bit internal state
     ${LIBTINYMT32_SRC_DIR}/tinymt32.c
-
-    ${LIBLORAGW_ROOT}/../packet_forwarder/src/jitqueue.c
 )
+#
+#    ${LIBLORAGW_ROOT}/../packet_forwarder/src/jitqueue.c
 
 add_library(loragw STATIC ${LIBLORAGW_SRC})
 set_property(TARGET loragw PROPERTY C_STANDARD 99)
